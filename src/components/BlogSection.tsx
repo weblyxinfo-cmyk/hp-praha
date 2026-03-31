@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "@/lib/LocaleContext";
+import { fallbackArticlesCs, fallbackArticlesEn } from "@/lib/fallback";
 
 interface Article {
   id: string;
@@ -16,19 +17,21 @@ interface Article {
 
 export default function BlogSection() {
   const { locale, t } = useLocale();
-  const [articles, setArticles] = useState<Article[]>([]);
+  const fallback = locale === "en" ? fallbackArticlesEn : fallbackArticlesCs;
+  const [articles, setArticles] = useState<Article[]>(fallback);
 
   useEffect(() => {
     fetch(`/api/public/articles?locale=${locale}`)
       .then((r) => r.json())
-      .then(setArticles)
+      .then((data) => {
+        if (data.length > 0) setArticles(data);
+        else setArticles(locale === "en" ? fallbackArticlesEn : fallbackArticlesCs);
+      })
       .catch(() => {});
   }, [locale]);
 
   const featured = articles.find((a) => a.featured) || articles[0];
   const others = articles.filter((a) => a !== featured).slice(0, 2);
-
-  if (articles.length === 0) return null;
 
   return (
     <section id="clanky" className="py-16 lg:py-24 bg-white">

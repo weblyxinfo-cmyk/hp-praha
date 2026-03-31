@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/playfair-display": "^5.2.8",
+    "@libsql/client": "^0.17.2",
     "@prisma/client": "^6.19.2",
     "bcryptjs": "^3.0.3",
     "jsonwebtoken": "^9.0.3",

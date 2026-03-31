@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useLocale } from "@/lib/LocaleContext";
+import { fallbackTestimonials } from "@/lib/fallback";
 
 interface Testimonial {
   id: string;
@@ -28,20 +29,20 @@ function Stars({ count }: { count: number }) {
 
 export default function TestimonialsSection() {
   const { locale, t } = useLocale();
-  const [items, setItems] = useState<Testimonial[]>([]);
+  const [items, setItems] = useState<Testimonial[]>(fallbackTestimonials);
 
   useEffect(() => {
     fetch("/api/public/testimonials")
       .then((r) => r.json())
-      .then(setItems)
+      .then((data) => {
+        if (data.length > 0) setItems(data);
+      })
       .catch(() => {});
   }, []);
 
   const name = (item: Testimonial) => (locale === "en" && item.nameEn ? item.nameEn : item.nameCs);
   const text = (item: Testimonial) => (locale === "en" && item.textEn ? item.textEn : item.textCs);
   const detail = (item: Testimonial) => (locale === "en" && item.detailEn ? item.detailEn : item.detailCs);
-
-  if (items.length === 0) return null;
 
   return (
     <section className="py-16 lg:py-24 bg-bg-cream">
