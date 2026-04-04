@@ -41,7 +41,7 @@ export default function BlogSection() {
             <span className="text-xs tracking-[0.2em] uppercase text-primary font-medium">{t.blog.label}</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-text-dark mt-2">{t.blog.title}</h2>
           </div>
-          <a href="#" className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark transition-colors">
+          <a href="/blog" className="hidden sm:inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-primary-dark transition-colors">
             {t.blog.all} <span aria-hidden="true">&rarr;</span>
           </a>
         </div>

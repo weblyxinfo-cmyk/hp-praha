@@ -12,8 +12,8 @@ export default function Navbar() {
   const navLinks = [
     { href: "#o-mne", label: t.nav.about },
     { href: "#lecba", label: t.nav.treatment },
-    { href: "#clanky", label: t.nav.articles },
-    { href: "#pripady", label: t.nav.cases },
+    { href: "/blog", label: t.nav.articles },
+    { href: "/blog", label: t.nav.cases },
     { href: "#cenik", label: t.nav.pricing },
   ];
 
