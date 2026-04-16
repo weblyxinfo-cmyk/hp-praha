@@ -1,7 +1,13 @@
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "hp-admin-secret-change-me";
+function getJwtSecret(): string {
+  const s = process.env.JWT_SECRET;
+  if (!s) {
+    throw new Error("JWT_SECRET is not set. Configure it in .env (see .env.example).");
+  }
+  return s;
+}
 
 export interface AdminSession {
   id: string;
@@ -9,12 +15,12 @@ export interface AdminSession {
 }
 
 export function signToken(payload: AdminSession): string {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: "7d" });
+  return jwt.sign(payload, getJwtSecret(), { expiresIn: "7d" });
 }
 
 export function verifyToken(token: string): AdminSession | null {
   try {
-    return jwt.verify(token, JWT_SECRET) as AdminSession;
+    return jwt.verify(token, getJwtSecret()) as AdminSession;
   } catch {
     return null;
   }

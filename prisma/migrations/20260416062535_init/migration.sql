@@ -57,6 +57,18 @@ CREATE TABLE "SiteSetting" (
     "value" TEXT NOT NULL
 );
 
+-- CreateTable
+CREATE TABLE "BookingRequest" (
+    "id" TEXT NOT NULL PRIMARY KEY,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "phone" TEXT NOT NULL DEFAULT '',
+    "message" TEXT NOT NULL DEFAULT '',
+    "locale" TEXT NOT NULL DEFAULT 'cs',
+    "handled" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "AdminUser_email_key" ON "AdminUser"("email");
 

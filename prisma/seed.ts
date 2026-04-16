@@ -4,15 +4,21 @@ const bcrypt = require("bcryptjs");
 const prisma = new PrismaClient();
 
 async function main() {
-  // Create admin user
-  const hashedPassword = await bcrypt.hash("admin123", 12);
+  // Create admin user from env (fail fast if not configured)
+  const adminEmail = process.env.ADMIN_EMAIL;
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  const adminName = process.env.ADMIN_NAME ?? "Admin";
+  if (!adminEmail || !adminPassword) {
+    throw new Error("ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env before seeding");
+  }
+  const hashedPassword = await bcrypt.hash(adminPassword, 12);
   await prisma.adminUser.upsert({
-    where: { email: "admin@homeopatie-petra.cz" },
-    update: {},
+    where: { email: adminEmail },
+    update: { password: hashedPassword, name: adminName },
     create: {
-      email: "admin@homeopatie-petra.cz",
+      email: adminEmail,
       password: hashedPassword,
-      name: "Petra Cihlářová",
+      name: adminName,
     },
   });
 

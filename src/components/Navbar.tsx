@@ -10,11 +10,12 @@ export default function Navbar() {
   const { t } = useLocale();
 
   const navLinks = [
-    { href: "#o-mne", label: t.nav.about },
-    { href: "#lecba", label: t.nav.treatment },
+    { href: "/#o-mne", label: t.nav.about },
+    { href: "/#proces", label: t.nav.process },
+    { href: "/#cenik", label: t.nav.pricing },
     { href: "/blog", label: t.nav.articles },
-    { href: "/blog", label: t.nav.cases },
-    { href: "#cenik", label: t.nav.pricing },
+    { href: "/#faq", label: t.nav.faq },
+    { href: "/#kontakt", label: t.nav.contact },
   ];
 
   return (
@@ -39,9 +40,9 @@ export default function Navbar() {
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="text-sm text-text-body hover:text-primary transition-colors">
+              <Link key={link.href + link.label} href={link.href} className="text-sm text-text-body hover:text-primary transition-colors">
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -76,9 +77,9 @@ export default function Navbar() {
         <div className="lg:hidden bg-white border-t border-border">
           <div className="px-4 py-4 space-y-3">
             {navLinks.map((link) => (
-              <a key={link.href} href={link.href} onClick={() => setMobileOpen(false)} className="block text-text-body hover:text-primary transition-colors py-2">
+              <Link key={link.href + link.label} href={link.href} onClick={() => setMobileOpen(false)} className="block text-text-body hover:text-primary transition-colors py-2">
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a href="tel:+420776385429" className="flex items-center gap-2 text-primary font-medium py-2">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

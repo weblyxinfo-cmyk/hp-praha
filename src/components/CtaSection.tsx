@@ -6,7 +6,7 @@ export default function CtaSection() {
   const { t } = useLocale();
 
   return (
-    <section id="kontakt" className="bg-primary-dark text-white py-16 lg:py-20">
+    <section className="bg-primary-dark text-white py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           <div>
@@ -21,8 +21,8 @@ export default function CtaSection() {
             <a href="tel:+420776385429" className="inline-flex items-center justify-center bg-gold hover:bg-gold-light text-primary-dark rounded-lg px-7 py-3.5 text-sm font-semibold transition-colors">
               +420 776 385 429
             </a>
-            <a href="mailto:petra@homeopatie-praha.com" className="inline-flex items-center justify-center border border-white/30 hover:border-white text-white rounded-lg px-7 py-3.5 text-sm font-medium transition-colors">
-              petra@homeopatie-praha.com
+            <a href="#kontakt" className="inline-flex items-center justify-center border border-white/30 hover:border-white text-white rounded-lg px-7 py-3.5 text-sm font-medium transition-colors">
+              {t.hero.cta}
             </a>
           </div>
         </div>
